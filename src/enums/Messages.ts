@@ -1,0 +1,18 @@
+export enum Messages {
+  INVALID_USERNAME = "username must contain letter and cannot start or end with '.', allowed characters: a-z A-Z 0-9 @$&._",
+  USERNAME_TOO_LONG = "max username lenght: 24",
+  USERNAME_TOO_SHORT = "min username lenght: 3",
+  DIFFERENT_PASSWD = "passwords are not the same",
+  SPACES_IN_URL = "URL cannot contain spaces",
+  URL_TOO_LONG = "URL too long",
+  INVALID_URL = "invalid URL",
+  POST_LIMIT = "one post per day!",
+  UNAUTHORIZED = "unauthorized",
+  ERROR = "something went wrong",
+  SUCCESS = "successfully posted",
+  LOGIN_ERROR = "invalid username or password",
+  ALREADY_EXISTS = "account already exists",
+  PASSWD_TOO_SHORT = "min password lenght: 8",
+  CAPTCHA_ERROR = "captcha cannot verify you",
+  HEADING_TOO_LONG = "heading too long",
+}
