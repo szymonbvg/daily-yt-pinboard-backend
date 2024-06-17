@@ -9,11 +9,11 @@ import { SearchRouter } from "./routes/v1/SearchRouter";
 import { AuthRouter } from "./routes/v1/AuthRouter";
 import { PostRouter } from "./routes/v1/PostRouter";
 
-const WHITELIST = ["http://localhost:4173", "http://localhost:5173"];
+const WHITELIST = ["http://localhost:4173", "http://localhost:5173", "https://ytpinboard.vercel.app"];
 
 const CORS_OPTIONS: CorsOptions = {
   origin: (origin, callback) => {
-    if (!origin || WHITELIST.indexOf(origin as string) !== -1) {
+    if (WHITELIST.indexOf(origin as string) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("not allowed"));
