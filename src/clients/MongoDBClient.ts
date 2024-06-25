@@ -36,14 +36,15 @@ export class MongoDBClient {
     }
   }
 
-  async searchByKeyword(keyword: string) {
+  async searchByKeyword(keyword: string, index: number) {
     try {
       const collection = this.client.db("ytpinboard").collection("profiles");
       const profiles = (await collection
         .find({ username: new RegExp(keyword, "i") })
         .toArray()) as ProfileType[];
 
-      return profiles;
+      const parsed = profiles.slice(index, index + 10);
+      return parsed;
     } catch (e) {
       if (e instanceof Error) {
         Logger.getInstance().error(e);
