@@ -11,15 +11,19 @@ export class ProfileController {
   async getProfileContent(req: Request, res: Response) {
     const params = req.params as ProfileParams;
 
+    const postsLenght = req.get("X-Loaded-Posts") ?? "0";
+
     const content = await MongoDBClient.getDefaultInstance().fetchProfileContent(params.user);
     if (!content) {
       res.send({ status: false, content: [] });
       return;
     }
+    const postsLenghtInt = parseInt(postsLenght);
+    const parsedContent = content.slice(postsLenghtInt, postsLenghtInt + 10);
 
     const token = req.get("X-Auth-Token");
     if (!token) {
-      res.send({ status: true, content: content });
+      res.send({ status: true, content: parsedContent, lenght: content.length });
       return;
     }
 
@@ -31,7 +35,7 @@ export class ProfileController {
       authenticated = parsed.username === params.user;
     }
 
-    res.send({ status: true, authenticated: authenticated, content: content });
+    res.send({ status: true, authenticated: authenticated, content: parsedContent, lenght: content.length });
   }
 
   async getPost(req: Request, res: Response) {
